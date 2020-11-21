@@ -19,18 +19,13 @@ import org.kodein.di.generic.instance
 import com.addincendekia.mvvmshoppinglist.ui.shopping.viewmodel.ShoppingItem as ShoppingItemVm
 import com.addincendekia.mvvmshoppinglist.ui.shopping.viewmodel.ShoppingItemFactory as ShoppingItemVmFactory
 
-class ShoppingActivity : AppCompatActivity() {
-//class ShoppingActivity : AppCompatActivity(), KodeinAware {
-//    override val kodein by kodein()
-//    private val factory: ShoppingItemVmFactory by instance()
+class ShoppingActivity : AppCompatActivity(), KodeinAware {
+    override val kodein by kodein()
+    private val factory: ShoppingItemVmFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
-
-        val database = ShoppingDatabase(this)
-        val repository = ShoppingItemRepository(database)
-        val factory = ShoppingItemVmFactory(repository)
 
         val viewModel = ViewModelProviders
             .of(this, factory)
